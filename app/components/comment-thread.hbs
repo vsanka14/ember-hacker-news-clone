@@ -1,0 +1,9 @@
+{{#each @comments as |comment|}}
+  <Comment
+    @by={{comment.by}}
+    @time={{comment.time}}
+    @text={{comment.text}}
+    @replies={{comment.replies}}
+    @numberOfComments={{comment.numberOfComments}}
+  />
+{{/each}}

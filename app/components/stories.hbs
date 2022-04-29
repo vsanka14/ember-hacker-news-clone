@@ -1,0 +1,30 @@
+<ul>
+  {{#each this.visibleStories as |item index|}}
+    <li>
+      <StoryItem
+        @index={{add index this.indexIncrementor}}
+        @title={{item.title}}
+        @url={{item.url}}
+        @score={{item.score}}
+        @by={{item.by}}
+        @time={{item.time}}
+        @descendants={{item.descendants}}
+        @id={{item.id}}
+        @isVisible={{item.isVisible}}
+        @toggleItemVisibility={{@toggleItemVisibility}}
+      />
+    </li>
+  {{/each}}
+</ul>
+{{#if this.isMoreBtnVisible}}
+  <LinkTo
+    type='button'
+    class='mt-2'
+    @route={{this.router.currentRouteName}}
+    @query={{hash p=this.nextPage}}
+    aria-label='Link to next page'
+  >More</LinkTo>
+{{/if}}
+{{#if this.isNoStoryFound}}
+  <p class='text-gray-500'>No stories found.</p>
+{{/if}}

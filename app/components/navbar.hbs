@@ -1,0 +1,33 @@
+<nav class='w-full flex items-center h-6 bg-orange-500'>
+  <LinkTo class='font-extrabold flex mr-2' @route='news' @query={{hash p=1}}>
+    <img
+      src='https://news.ycombinator.com/y18.gif'
+      class='w-5 border border-white mx-1'
+      alt='Y Combinator Sign'
+    />
+    <span>Hacker News</span>
+  </LinkTo>
+  {{#each
+    (array
+      (hash name='new' route='newest')
+      (hash name='ask' route='ask')
+      (hash name='show' route='show')
+      (hash name='jobs' route='jobs')
+    )
+    as |routeItem index|
+  }}
+    {{#let (equals index 3) as |isLastItem|}}
+      <LinkTo @route={{routeItem.route}} @query={{hash p=1}}>
+        <span
+          class={{if
+            (equals this.currentRouteName routeItem.route)
+            'text-white'
+          }}
+        >{{routeItem.name}}</span>
+      </LinkTo>
+      {{#unless isLastItem}}
+        <span class='mx-2'>|</span>
+      {{/unless}}
+    {{/let}}
+  {{/each}}
+</nav>

@@ -1,0 +1,18 @@
+{{page-title @model.story.title replace=true}}
+
+<StoryItem
+  @isHeader={{true}}
+  @isIndexHidden={{true}}
+  @by={{@model.story.by}}
+  @url={{@model.story.url}}
+  @title={{@model.story.title}}
+  @score={{@model.story.score}}
+  @time={{@model.story.time}}
+  @descendants={{@model.story.descendants}}
+  @text={{@model.story.text}}
+  @isVisible={{@model.story.isVisible}}
+  @toggleItemVisibility={{this.toggleItemVisibility}}
+/>
+<AddCommentForm />
+<CommentThread @comments={{@model.comments}} />
+{{outlet}}

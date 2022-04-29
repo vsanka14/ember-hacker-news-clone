@@ -1,0 +1,19 @@
+{{! template-lint-disable no-triple-curlies }}
+<div class='text-gray-500'>
+  <div class='flex text-left'>
+    <p class='mr-2 w-14'>user:</p>
+    <p>{{@id}}</p>
+  </div>
+  <div class='flex text-left'>
+    <p class='mr-2 w-14'>created:</p>
+    <p>{{to-date-string @created}}</p>
+  </div>
+  <div class='flex text-left'>
+    <p class='mr-2 w-14'>karma:</p>
+    <p>{{@karma}}</p>
+  </div>
+  <div class='flex text-left'>
+    <p class='mr-2 w-14'>about:</p>
+    <p>{{{@about}}}</p>
+  </div>
+</div>

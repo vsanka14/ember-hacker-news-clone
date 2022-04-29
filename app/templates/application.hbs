@@ -1,7 +1,10 @@
-{{page-title "HackerNewsClone"}}
+{{page-title 'HackerNewsClone'}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<div class='w-screen h-full flex justify-center items-center text-sm'>
+  <div class='w-full sm:w-10/12 h-full'>
+    <Navbar />
+    <div class='p-2 border-solid border-2 bg-gray-100'>
+      {{outlet}}
+    </div>
+  </div>
+</div>
