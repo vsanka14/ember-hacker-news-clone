@@ -1,9 +1,11 @@
 {{page-title 'User'}}
 
-<UserProfile
-  @id={{@model.id}}
-  @created={{@model.created}}
-  @karma={{@model.karma}}
-  @about={{@model.about}}
-/>
+<Layout>
+  <UserProfile
+    @id={{@model.id}}
+    @created={{@model.created}}
+    @karma={{@model.karma}}
+    @about={{@model.about}}
+  />
+</Layout>
 {{outlet}}

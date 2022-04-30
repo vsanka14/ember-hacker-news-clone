@@ -1,8 +1,10 @@
 {{page-title 'Jobs | Hacker News' replace=true}}
 
-<Stories
-  @stories={{@model}}
-  @page={{this.page}}
-  @toggleItemVisibility={{this.toggleItemVisibility}}
-/>
+<Layout>
+  <Stories
+    @stories={{@model}}
+    @page={{this.page}}
+    @toggleItemVisibility={{this.toggleItemVisibility}}
+  />
+</Layout>
 {{outlet}}

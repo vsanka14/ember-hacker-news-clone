@@ -15,4 +15,5 @@ Router.map(function () {
   this.route('ask');
   this.route('show');
   this.route('jobs');
+  this.route('showhn');
 });
