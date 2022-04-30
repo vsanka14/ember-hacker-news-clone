@@ -5,11 +5,6 @@ import { action } from '@ember/object';
 export default class Comment extends Component {
   @tracked isCollapsed = false;
 
-  @action
-  toggleCommentVisibility() {
-    this.isCollapsed = !this.isCollapsed;
-  }
-
   get isParentBtnVisible() {
     return this.args.parent && this.args.root;
   }
@@ -24,5 +19,16 @@ export default class Comment extends Component {
 
   get isNextBtnVisible() {
     return this.args.next && !this.isCollapsed;
+  }
+
+  @action
+  scrollToComment(id) {
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  @action
+  toggleCommentVisibility() {
+    this.isCollapsed = !this.isCollapsed;
   }
 }
