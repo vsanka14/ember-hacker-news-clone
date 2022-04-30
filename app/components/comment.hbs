@@ -1,5 +1,5 @@
 {{! template-lint-disable no-triple-curlies }}
-<div id={{@id}}>
+<div id={{@id}} {{scroll-into-view}}>
   <div class='flex text-xs text-gray-500 my-2'>
     <button type='button' class='self-start mr-1'>&#x25B2;</button>
     <span class='mr-1'>{{@by}}</span>
@@ -9,7 +9,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringItemIntoView @parent)}}
+        data-scroll-to-id={{@parent}}
       >parent</button>
       <span class='mr-1'>|</span>
     {{/if}}
@@ -17,7 +17,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringItemIntoView @root)}}
+        data-scroll-to-id={{@root}}
       >root</button>
       <span class='mr-1'>|</span>
     {{/if}}
@@ -25,7 +25,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringItemIntoView @prev)}}
+        data-scroll-to-id={{@prev}}
       >prev</button>
       <span class='mr-1'>|</span>
     {{/if}}
@@ -33,7 +33,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringItemIntoView @next)}}
+        data-scroll-to-id={{@next}}
       >next</button>
     {{/if}}
     <button type='button' {{on 'click' this.toggleCommentVisibility}}>
