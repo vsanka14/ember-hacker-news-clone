@@ -9,6 +9,9 @@ export default class Comment {
     text,
     replies,
     numberOfComments,
+    root,
+    prev,
+    next,
   }) {
     this.by = by;
     this.id = id;
@@ -19,5 +22,8 @@ export default class Comment {
     this.text = text;
     this.replies = replies;
     this.numberOfComments = numberOfComments;
+    this.root = root;
+    this.prev = prev;
+    this.next = next;
   }
 }

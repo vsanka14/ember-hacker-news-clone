@@ -1,7 +1,7 @@
 import { helper } from '@ember/component/helper';
 
 function timeElapsed([timestamp]) {
-  if (typeof timeElapsed !== 'number') return;
+  if (typeof timestamp !== 'number') return;
 
   const timestampInMs = timestamp * 1000;
   const delta = (Date.now() - timestampInMs) / 1000;

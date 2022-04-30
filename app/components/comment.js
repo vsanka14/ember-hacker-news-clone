@@ -9,4 +9,20 @@ export default class Comment extends Component {
   toggleCommentVisibility() {
     this.isCollapsed = !this.isCollapsed;
   }
+
+  get isParentLinkVisible() {
+    return this.args.parent && this.args.root;
+  }
+
+  get isRootLinkVisible() {
+    return this.args.root && this.args.parent !== this.args.root;
+  }
+
+  get isPreviousLinkVisible() {
+    return this.args.prev && this.args.prev !== this.args.parent;
+  }
+
+  get isNextLinkVisible() {
+    return !!this.args.next && !this.isCollapsed;
+  }
 }

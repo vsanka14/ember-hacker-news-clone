@@ -15,7 +15,7 @@ export default class JobsController extends Controller {
     super(...arguments);
 
     this.router.on('routeDidChange', () => {
-      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
     });
   }
 

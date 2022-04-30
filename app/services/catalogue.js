@@ -38,8 +38,7 @@ export default class CatalogueService extends Service {
           return new Story(json);
         case 'comment':
           if (!json.text) return;
-          json.replies = await this.fetchItemsOnPage(json.kids, type);
-          json.numberOfComments = this.getCommentsCount(json);
+          json.replies = await this.fetchItems(json.kids, type);
           return new Comment(json);
         case 'user':
           return new User(json);
@@ -56,18 +55,35 @@ export default class CatalogueService extends Service {
   }
 
   /**
-   * Returns the number of comments on a comment thread
-   * @param {Object} comment: object of model type Comment
-   * @returns {number} total number of comments
+   * Traverse through list of comments to get numberOfReplies on each comment and make prev, root, next associations
+   * @param {Array} comments: array of comments
+   * @returns {Array} Array of comments with numberOfReplies, prev, root, next on each comment object
    */
-  getCommentsCount(comment) {
-    if (!comment.replies) return 0;
-
-    let count = 1;
-    for (const reply of comment.replies) {
-      count += this.getCommentsCount(reply);
+  traverseComments(comments) {
+    for (let i = 0; i < comments.length; i++) {
+      const [comment, nextComment, previousComment] = [
+        comments[i],
+        comments[i + 1],
+        comments[i - 1],
+      ];
+      comment.next = nextComment ? nextComment.id : null;
+      comment.prev = previousComment ? previousComment.id : null;
+      traverseComment(comment, comment.id);
     }
-    return count;
+
+    function traverseComment(comment, root) {
+      if (!comment) return;
+
+      let count = 1;
+      for (const reply of comment.replies) {
+        count += traverseComment(reply, root);
+      }
+      comment.numberOfComments = count;
+      comment.root = comment.id !== root ? root : null;
+      return count;
+    }
+
+    return comments;
   }
 
   /**
@@ -89,7 +105,7 @@ export default class CatalogueService extends Service {
    * @param {string} type: "story" | "comment"
    * @returns {Promise} Promise resolving to an array of HN items
    */
-  async fetchItemsOnPage(ids, type) {
+  async fetchItems(ids, type) {
     const items = [];
 
     if (!ids) return items;
@@ -98,6 +114,11 @@ export default class CatalogueService extends Service {
       const item = await this.fetchItem(id, type);
       if (item) items.push(item);
     }
+
+    if (type === 'comment') {
+      this.traverseComments(items);
+    }
+
     return items;
   }
 
@@ -129,7 +150,7 @@ export default class CatalogueService extends Service {
   async fetchStoriesOnPage(page, type) {
     const topStories = await this.fetchStories(type);
     const storyIds = this.getIdsForStoriesOnPage(page, topStories);
-    const stories = await this.fetchItemsOnPage(storyIds, 'story');
+    const stories = await this.fetchItems(storyIds, 'story');
     return stories;
   }
 }

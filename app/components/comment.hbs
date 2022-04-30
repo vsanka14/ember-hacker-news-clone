@@ -1,14 +1,45 @@
 {{! template-lint-disable no-triple-curlies }}
-<div class='flex text-xs text-gray-500 my-2'>
+<div class='flex text-xs text-gray-500 my-2' id={{@id}}>
   <button type='button' class='self-start mr-1'>&#x25B2;</button>
   <span class='mr-1'>{{@by}}</span>
   <span class='mr-1'>{{time-elapsed @time}}</span>
   <span class='mr-1'>|</span>
+  {{#if this.isParentLinkVisible}}
+    <button
+      type='button'
+      class='mr-1'
+      {{on 'click' (fn @bringToFocus @parent)}}
+    >parent</button>
+    <span class='mr-1'>|</span>
+  {{/if}}
+  {{#if this.isRootLinkVisible}}
+    <button
+      type='button'
+      class='mr-1'
+      {{on 'click' (fn @bringToFocus @root)}}
+    >root</button>
+    <span class='mr-1'>|</span>
+  {{/if}}
+  {{#if this.isPreviousLinkVisible}}
+    <button
+      type='button'
+      class='mr-1'
+      {{on 'click' (fn @bringToFocus @prev)}}
+    >prev</button>
+    <span class='mr-1'>|</span>
+  {{/if}}
+  {{#if this.isNextLinkVisible}}
+    <button
+      type='button'
+      class='mr-1'
+      {{on 'click' (fn @bringToFocus @next)}}
+    >next</button>
+  {{/if}}
   <button type='button' {{on 'click' this.toggleCommentVisibility}}>
     {{#if this.isCollapsed}}
       <span>[{{@numberOfComments}} more]</span>
     {{else}}
-      <span>next [–]</span>
+      <span>[–]</span>
     {{/if}}
   </button>
 </div>

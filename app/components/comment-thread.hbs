@@ -1,9 +1,15 @@
 {{#each @comments as |comment|}}
   <Comment
+    @id={{comment.id}}
     @by={{comment.by}}
     @time={{comment.time}}
     @text={{comment.text}}
     @replies={{comment.replies}}
+    @root={{comment.root}}
+    @parent={{comment.parent}}
+    @prev={{comment.prev}}
+    @next={{comment.next}}
     @numberOfComments={{comment.numberOfComments}}
+    @bringToFocus={{this.bringToFocus}}
   />
 {{/each}}
