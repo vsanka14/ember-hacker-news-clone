@@ -4,32 +4,32 @@
     <button type='button' class='self-start mr-1'>&#x25B2;</button>
     <span class='mr-1'>{{@by}}</span>
     <span class='mr-1'>{{time-elapsed @time}}</span>
-    <span class='mr-1'>|</span>
     {{#if this.isParentBtnVisible}}
+      <span class='mr-1'>|</span>
       <button
         type='button'
         class='mr-1 hover:underline'
         {{on 'click' (fn this.scrollToComment @parent)}}
       >parent</button>
-      <span class='mr-1'>|</span>
     {{/if}}
     {{#if this.isRootBtnVisible}}
+      <span class='mr-1'>|</span>
       <button
         type='button'
         class='mr-1 hover:underline'
         {{on 'click' (fn this.scrollToComment @root)}}
       >root</button>
-      <span class='mr-1'>|</span>
     {{/if}}
     {{#if this.isPreviousBtnVisible}}
+      <span class='mr-1'>|</span>
       <button
         type='button'
         class='mr-1 hover:underline'
         {{on 'click' (fn this.scrollToComment @prev)}}
       >prev</button>
-      <span class='mr-1'>|</span>
     {{/if}}
     {{#if this.isNextBtnVisible}}
+      <span class='mr-1'>|</span>
       <button
         type='button'
         class='mr-1 hover:underline'
