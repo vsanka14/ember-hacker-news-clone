@@ -1,6 +1,6 @@
 {{! template-lint-disable no-triple-curlies }}
 <div id={{@id}}>
-  <div class='flex text-xs text-gray-500 my-2'>
+  <div class='flex text-xs text-grey my-2'>
     <button type='button' class='self-start mr-1'>&#x25B2;</button>
     <span class='mr-1'>{{@by}}</span>
     <span class='mr-1'>{{time-elapsed @time}}</span>
@@ -8,32 +8,32 @@
     {{#if this.isParentBtnVisible}}
       <button
         type='button'
-        class='mr-1'
-        {{on 'click' (fn this.scrollToComment @id)}}
+        class='mr-1 hover:underline'
+        {{on 'click' (fn this.scrollToComment @parent)}}
       >parent</button>
       <span class='mr-1'>|</span>
     {{/if}}
     {{#if this.isRootBtnVisible}}
       <button
         type='button'
-        class='mr-1'
-        {{on 'click' (fn this.scrollToComment @id)}}
+        class='mr-1 hover:underline'
+        {{on 'click' (fn this.scrollToComment @root)}}
       >root</button>
       <span class='mr-1'>|</span>
     {{/if}}
     {{#if this.isPreviousBtnVisible}}
       <button
         type='button'
-        class='mr-1'
-        {{on 'click' (fn this.scrollToComment @id)}}
+        class='mr-1 hover:underline'
+        {{on 'click' (fn this.scrollToComment @prev)}}
       >prev</button>
       <span class='mr-1'>|</span>
     {{/if}}
     {{#if this.isNextBtnVisible}}
       <button
         type='button'
-        class='mr-1'
-        {{on 'click' (fn this.scrollToComment @id)}}
+        class='mr-1 hover:underline'
+        {{on 'click' (fn this.scrollToComment @next)}}
       >next</button>
     {{/if}}
     <button type='button' {{on 'click' this.toggleCommentVisibility}}>
