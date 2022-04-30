@@ -1,39 +1,39 @@
 {{! template-lint-disable no-triple-curlies }}
-<div id={{@id}} {{scroll-into-view @isFocused @id}}>
+<div id={{@id}}>
   <div class='flex text-xs text-gray-500 my-2'>
     <button type='button' class='self-start mr-1'>&#x25B2;</button>
     <span class='mr-1'>{{@by}}</span>
     <span class='mr-1'>{{time-elapsed @time}}</span>
     <span class='mr-1'>|</span>
-    {{#if this.isParentLinkVisible}}
+    {{#if this.isParentBtnVisible}}
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringToFocus @parent)}}
+        {{on 'click' (fn @bringItemIntoView @parent)}}
       >parent</button>
       <span class='mr-1'>|</span>
     {{/if}}
-    {{#if this.isRootLinkVisible}}
+    {{#if this.isRootBtnVisible}}
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringToFocus @root)}}
+        {{on 'click' (fn @bringItemIntoView @root)}}
       >root</button>
       <span class='mr-1'>|</span>
     {{/if}}
-    {{#if this.isPreviousLinkVisible}}
+    {{#if this.isPreviousBtnVisible}}
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringToFocus @prev)}}
+        {{on 'click' (fn @bringItemIntoView @prev)}}
       >prev</button>
       <span class='mr-1'>|</span>
     {{/if}}
-    {{#if this.isNextLinkVisible}}
+    {{#if this.isNextBtnVisible}}
       <button
         type='button'
         class='mr-1'
-        {{on 'click' (fn @bringToFocus @next)}}
+        {{on 'click' (fn @bringItemIntoView @next)}}
       >next</button>
     {{/if}}
     <button type='button' {{on 'click' this.toggleCommentVisibility}}>

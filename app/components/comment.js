@@ -10,19 +10,19 @@ export default class Comment extends Component {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  get isParentLinkVisible() {
+  get isParentBtnVisible() {
     return this.args.parent && this.args.root;
   }
 
-  get isRootLinkVisible() {
+  get isRootBtnVisible() {
     return this.args.root && this.args.parent !== this.args.root;
   }
 
-  get isPreviousLinkVisible() {
+  get isPreviousBtnVisible() {
     return this.args.prev && this.args.prev !== this.args.parent;
   }
 
-  get isNextLinkVisible() {
-    return !!this.args.next && !this.isCollapsed;
+  get isNextBtnVisible() {
+    return this.args.next && !this.isCollapsed;
   }
 }
