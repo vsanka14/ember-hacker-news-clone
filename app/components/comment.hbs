@@ -9,7 +9,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' this.scrollToComment @id}}
+        {{on 'click' (fn this.scrollToComment @id)}}
       >parent</button>
       <span class='mr-1'>|</span>
     {{/if}}
@@ -17,7 +17,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' this.scrollToComment @id}}
+        {{on 'click' (fn this.scrollToComment @id)}}
       >root</button>
       <span class='mr-1'>|</span>
     {{/if}}
@@ -25,7 +25,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' this.scrollToComment @id}}
+        {{on 'click' (fn this.scrollToComment @id)}}
       >prev</button>
       <span class='mr-1'>|</span>
     {{/if}}
@@ -33,7 +33,7 @@
       <button
         type='button'
         class='mr-1'
-        {{on 'click' this.scrollToComment @id}}
+        {{on 'click' (fn this.scrollToComment @id)}}
       >next</button>
     {{/if}}
     <button type='button' {{on 'click' this.toggleCommentVisibility}}>
