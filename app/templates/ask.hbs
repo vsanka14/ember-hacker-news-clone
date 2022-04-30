@@ -1,8 +1,10 @@
 {{page-title 'Ask | Hacker News'}}
 
-<Stories
-  @stories={{@model}}
-  @page={{this.page}}
-  @toggleItemVisibility={{this.toggleItemVisibility}}
-/>
+<Layout>
+  <Stories
+    @stories={{@model}}
+    @page={{this.page}}
+    @toggleItemVisibility={{this.toggleItemVisibility}}
+  />
+</Layout>
 {{outlet}}

@@ -1,8 +1,12 @@
 {{! template-lint-disable no-triple-curlies }}
 <div id={{@id}}>
-  <div class='flex text-xs text-grey my-2'>
+  <div class='flex text-grey my-1 text-xs'>
     <button type='button' class='self-start mr-1'>&#x25B2;</button>
-    <span class='mr-1'>{{@by}}</span>
+    <LinkTo
+      class='mr-1 hover:underline'
+      @route='user'
+      @query={{hash id=@by}}
+    >{{@by}}</LinkTo>
     <span class='mr-1'>{{time-elapsed @time}}</span>
     {{#if this.isParentBtnVisible}}
       <span class='mr-1'>|</span>
@@ -36,7 +40,11 @@
         {{on 'click' (fn this.scrollToComment @next)}}
       >next</button>
     {{/if}}
-    <button type='button' {{on 'click' this.toggleCommentVisibility}}>
+    <button
+      type='button'
+      class='hover:underline'
+      {{on 'click' this.toggleCommentVisibility}}
+    >
       {{#if this.isCollapsed}}
         <span>[{{@numberOfComments}} more]</span>
       {{else}}
@@ -45,7 +53,7 @@
     </button>
   </div>
   {{#unless this.isCollapsed}}
-    <div class='my-2'>{{{@text}}}</div>
+    <div class='my-0.5 ml-4 text-xs comment'>{{{@text}}}</div>
     <div class='ml-8'>
       <CommentThread @comments={{@replies}} />
     </div>

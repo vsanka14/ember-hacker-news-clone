@@ -1,6 +1,12 @@
 <div class='w-full sm:w-10/12 h-full my-2'>
   <Navbar />
-  <div class='p-2 border-solid border-2 bg-ivory'>
-    {{yield}}
+  <div class='border-solid border-2 bg-ivory'>
+    <div class='py-1 pr-2'>
+      {{yield}}
+    </div>
+    {{#unless @hideFooter}}
+      <hr class='mt-1 mb-2 border border-safety-orange' />
+      <Footer />
+    {{/unless}}
   </div>
 </div>

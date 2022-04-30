@@ -1,20 +1,22 @@
 {{page-title @model.story.title replace=true}}
 
 <Layout>
-  <StoryItem
-    @isHeader={{true}}
-    @isIndexHidden={{true}}
-    @by={{@model.story.by}}
-    @url={{@model.story.url}}
-    @title={{@model.story.title}}
-    @score={{@model.story.score}}
-    @time={{@model.story.time}}
-    @descendants={{@model.story.descendants}}
-    @text={{@model.story.text}}
-    @isVisible={{@model.story.isVisible}}
-    @toggleItemVisibility={{this.toggleItemVisibility}}
-  />
-  <AddCommentForm />
-  <CommentThread @comments={{@model.comments}} />
+  <div class='p-2'>
+    <StoryItem
+      @isHeader={{true}}
+      @isIndexHidden={{true}}
+      @by={{@model.story.by}}
+      @url={{@model.story.url}}
+      @title={{@model.story.title}}
+      @score={{@model.story.score}}
+      @time={{@model.story.time}}
+      @descendants={{@model.story.descendants}}
+      @text={{@model.story.text}}
+      @isVisible={{@model.story.isVisible}}
+      @toggleItemVisibility={{this.toggleItemVisibility}}
+    />
+    <AddCommentForm />
+    <CommentThread @comments={{@model.comments}} />
+  </div>
 </Layout>
 {{outlet}}

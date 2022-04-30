@@ -18,7 +18,7 @@ export default class Comment extends Component {
   }
 
   get isNextBtnVisible() {
-    return this.args.next && !this.isCollapsed;
+    return !!this.args.next;
   }
 
   @action

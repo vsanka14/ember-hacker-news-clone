@@ -1,8 +1,12 @@
 <nav class='w-full flex items-center h-6 bg-safety-orange'>
-  <LinkTo class='font-extrabold flex mr-2' @route='news' @query={{hash p=1}}>
+  <LinkTo
+    class='font-extrabold flex mr-2 tracking-wide'
+    @route='news'
+    @query={{hash p=1}}
+  >
     <img
       src='https://news.ycombinator.com/y18.gif'
-      class='w-5 border border-white mx-1'
+      class='w-5 border border-white ml-0.5 mr-1'
       alt='Y Combinator Sign'
     />
     <span>Hacker News</span>

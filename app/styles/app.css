@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.comment p {
+  margin-top: 8px;
+}
+
+.comment pre {
+  max-width: 680px;
+  margin: 16px;
+}
