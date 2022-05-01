@@ -55,6 +55,38 @@ export default class CatalogueService extends Service {
   }
 
   /**
+   * Returns the ids of the stories that have to be rendered on a page
+   * @param {number} page: the page query param
+   * @param {array} topStories: array of top story item ids
+   * @returns {Array} array of ids
+   */
+  getIdsForStoriesOnPage(page, topStories) {
+    const lastItemIndex = page * 30;
+    const startItemIndex = lastItemIndex - 30;
+    const storyIds = topStories.slice(startItemIndex, lastItemIndex);
+    return storyIds;
+  }
+
+  /**
+   * Returns an array of HN items based on the type for a page
+   * @param {Array} ids: item ids
+   * @param {string} type: "story" | "comment"
+   * @returns {Promise} Promise resolving to an array of HN items
+   */
+  async fetchItems(ids, type) {
+    const items = [];
+
+    if (!ids) return items;
+
+    for (const id of ids) {
+      const item = await this.fetchItem(id, type);
+      if (item) items.push(item);
+    }
+
+    return items;
+  }
+
+  /**
    * Traverse through list of comments to get numberOfReplies on each comment and make prev, root, next associations
    * @param {Array} comments: array of comments
    * @returns {Array} Array of comments with numberOfReplies, prev, root, next on each comment object
@@ -87,39 +119,14 @@ export default class CatalogueService extends Service {
   }
 
   /**
-   * Returns the ids of the stories that have to be rendered on a page
-   * @param {number} page: the page query param
-   * @param {array} topStories: array of top story item ids
-   * @returns {Array} array of ids
+   * Fetch all the comments on a story
+   * @param {Array} commentIds: Array of all comment ids on a story
+   * @returns Array of all comments on the story
    */
-  getIdsForStoriesOnPage(page, topStories) {
-    const lastItemIndex = page * 30;
-    const startItemIndex = lastItemIndex - 30;
-    const storyIds = topStories.slice(startItemIndex, lastItemIndex);
-    return storyIds;
-  }
-
-  /**
-   * Returns an array of HN items based on the type for a page
-   * @param {Array} ids: item ids
-   * @param {string} type: "story" | "comment"
-   * @returns {Promise} Promise resolving to an array of HN items
-   */
-  async fetchItems(ids, type) {
-    const items = [];
-
-    if (!ids) return items;
-
-    for (const id of ids) {
-      const item = await this.fetchItem(id, type);
-      if (item) items.push(item);
-    }
-
-    if (type === 'comment') {
-      this.traverseComments(items);
-    }
-
-    return items;
+  async fetchComments(commentIds) {
+    const comments = await this.fetchItems(commentIds, 'comment');
+    this.traverseComments(comments);
+    return comments;
   }
 
   /**

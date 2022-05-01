@@ -1,6 +1,6 @@
 {{! template-lint-disable no-triple-curlies }}
 <div id={{@id}}>
-  <div class='flex text-grey my-1 text-xs'>
+  <div class='flex flex-wrap text-grey my-1 text-xs'>
     <button type='button' class='self-start mr-1'>&#x25B2;</button>
     <LinkTo
       class='mr-1 hover:underline'
@@ -53,7 +53,7 @@
     </button>
   </div>
   {{#unless this.isCollapsed}}
-    <div class='my-0.5 ml-4 text-xs comment'>{{{@text}}}</div>
+    <div class='my-0.5 ml-4 text-xs break-words comment'>{{{@text}}}</div>
     <div class='ml-8'>
       <CommentThread @comments={{@replies}} />
     </div>
