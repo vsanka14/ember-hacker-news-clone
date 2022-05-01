@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.comment p {
+.rendered-html p {
   margin-top: 8px;
 }
 
-.comment pre {
+.rendered-html pre {
   overflow: auto;
   padding: 2px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+.rendered-html a {
+  text-decoration: underline;
 }

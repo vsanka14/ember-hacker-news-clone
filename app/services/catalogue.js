@@ -33,6 +33,9 @@ export default class CatalogueService extends Service {
       const url = `${baseURL}/${ITEM_TYPES[type]}/${id}.json`;
       const response = await fetch(url);
       const json = await response.json();
+
+      if (!json) return;
+
       switch (type) {
         case 'story':
           return new Story(json);

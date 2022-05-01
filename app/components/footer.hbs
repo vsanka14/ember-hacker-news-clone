@@ -1,11 +1,31 @@
-<footer class='w-full flex flex-col items-center justify-center'>
+<footer class='w-full flex flex-col items-center justify-center text-grey'>
   <a
     href='https://www.ycombinator.com/apply/'
     rel='noopener noreferrer'
     target='_blank'
-    class='text-grey'
   >Applications are open for YC Summer 2022</a>
   <div class='my-3 text-xs'>
-    links
+    {{#each
+      (array
+        (hash name='Guidelines' route='newsguidelines')
+        (hash name='FAQ' route='newsguidelines')
+        (hash name='Lists' route='newsguidelines')
+        (hash name='API' route='newsguidelines')
+        (hash name='Security' route='newsguidelines')
+        (hash name='Legal' route='newsguidelines')
+        (hash name='Apply to YC' route='newsguidelines')
+        (hash name='Apply to YC' route='newsguidelines')
+      )
+      as |routeItem index|
+    }}
+      {{#let (equals index 7) as |isLastItem|}}
+        <LinkTo @route={{routeItem.route}}>
+          {{routeItem.name}}
+        </LinkTo>
+        {{#unless isLastItem}}
+          <span class='mx-0.5'>|</span>
+        {{/unless}}
+      {{/let}}
+    {{/each}}
   </div>
 </footer>
