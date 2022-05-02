@@ -11,7 +11,7 @@ function timeElapsed([timestamp]) {
   const days = Math.floor(hours / 24);
 
   if (days) {
-    return `${days} ${days > 1 ? 'days' : 'day'}`;
+    return `${days} ${days > 1 ? 'days' : 'day'} ago`;
   }
 
   if (hours) {

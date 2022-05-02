@@ -9,6 +9,7 @@ module.exports = function (defaults) {
     // Add options here
     postcssOptions: {
       compile: {
+        includePaths: ['app'],
         // track changes in template, css, scss, and tailwind config files
         cacheInclude: [/.*\.(css|scss|hbs)$/, /.tailwind\/config\.js$/],
         plugins: [

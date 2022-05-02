@@ -1,12 +1,14 @@
 {{! template-lint-disable no-triple-curlies }}
 <div class='my-1 flex'>
-  <div class='flex items-start text-grey'>
-    {{#unless @isIndexHidden}}
-      <span class='inline-block w-5 mr-1 text-right'>{{@index}}.</span>
-    {{/unless}}
-    <button type='button' class='text-xs mr-1 mt-0.5'>&#x25B2;</button>
-  </div>
-  <div>
+  {{#unless @isIndexAndUpvoteHidden}}
+    <div class='flex items-start text-grey'>
+      {{#unless @isIndexHidden}}
+        <span class='inline-block w-5 mr-1 text-right'>{{@index}}.</span>
+      {{/unless}}
+      <button type='button' class='text-xs mr-1 mt-0.5'>&#x25B2;</button>
+    </div>
+  {{/unless}}
+  <div class={{if @isIndexAndUpvoteHidden 'ml-8'}}>
     <div class='flex flex-wrap items-center'>
       <p class='mr-1 {{if @isHeader "tracking-wide"}}'>{{@title}}</p>
       {{#if @url}}
@@ -17,37 +19,55 @@
         >({{truncate-url @url}})</a>
       {{/if}}
     </div>
-    <div class='flex flex-wrap items-center text-xs text-grey'>
-      <span class='mr-1'>{{@score}} points</span>
-      <span class='mr-1'>by</span>
-      <LinkTo class='mr-1 hover:underline' @route='user' @query={{hash id=@by}}>
-        {{@by}}
-      </LinkTo>
-      <LinkTo class='mr-1 hover:underline' @route='item' @query={{hash id=@id}}>
+    {{#if @shouldOnlyShowTimeInSubtext}}
+      <LinkTo
+        class='mr-1 hover:underline text-xs text-grey'
+        @route='item'
+        @query={{hash id=@id}}
+      >
         {{time-elapsed @time}}
       </LinkTo>
-      <span class='mr-1'>|</span>
-      <button
-        type='button'
-        class='mr-1 hover:underline'
-        {{on 'click' (fn @toggleItemVisibility @id)}}
-      >
-        {{#if @isVisible}}
-          hide
-        {{else}}
-          un-hide
-        {{/if}}
-      </button>
-      <span class='mr-1'>|</span>
-      <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
-        {{#if this.isNoCommentsOnStory}}
-          discuss
-        {{else}}
-          {{@descendants}}
-          comments
-        {{/if}}
-      </LinkTo>
-    </div>
+    {{else}}
+      <div class='flex flex-wrap items-center text-xs text-grey'>
+        <span class='mr-1'>{{@score}} points</span>
+        <span class='mr-1'>by</span>
+        <LinkTo
+          class='mr-1 hover:underline'
+          @route='user'
+          @query={{hash id=@by}}
+        >
+          {{@by}}
+        </LinkTo>
+        <LinkTo
+          class='mr-1 hover:underline'
+          @route='item'
+          @query={{hash id=@id}}
+        >
+          {{time-elapsed @time}}
+        </LinkTo>
+        <span class='mr-1'>|</span>
+        <button
+          type='button'
+          class='mr-1 hover:underline'
+          {{on 'click' (fn @toggleItemVisibility @id)}}
+        >
+          {{#if @isVisible}}
+            hide
+          {{else}}
+            un-hide
+          {{/if}}
+        </button>
+        <span class='mr-1'>|</span>
+        <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
+          {{#if this.isNoCommentsOnStory}}
+            discuss
+          {{else}}
+            {{@descendants}}
+            comments
+          {{/if}}
+        </LinkTo>
+      </div>
+    {{/if}}
   </div>
 </div>
 {{#if @text}}
