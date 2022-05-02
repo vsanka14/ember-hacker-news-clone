@@ -16,52 +16,36 @@
         >({{truncate-url @url}})</a>
       {{/if}}
     </div>
-    {{#if @shouldOnlyShowTimeInSubtext}}
-      <div class='flex flex-wrap items-center text-xs text-grey'>
-        <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
-          {{time-elapsed @time}}
-        </LinkTo>
-      </div>
-    {{else}}
-      <div class='flex flex-wrap items-center text-xs text-grey'>
-        <span class='mr-1'>{{@score}} points</span>
-        <span class='mr-1'>by</span>
-        <LinkTo
-          class='mr-1 hover:underline'
-          @route='user'
-          @query={{hash id=@by}}
-        >
-          {{@by}}
-        </LinkTo>
-        <LinkTo
-          class='mr-1 hover:underline'
-          @route='item'
-          @query={{hash id=@id}}
-        >
-          {{time-elapsed @time}}
-        </LinkTo>
-        <span class='mr-1'>|</span>
-        <button
-          type='button'
-          class='mr-1 hover:underline'
-          {{on 'click' (fn @toggleItemVisibility @id)}}
-        >
-          {{#if @isVisible}}
-            hide
-          {{else}}
-            un-hide
-          {{/if}}
-        </button>
-        <span class='mr-1'>|</span>
-        <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
-          {{#if this.isNoCommentsOnStory}}
-            discuss
-          {{else}}
-            {{@descendants}}
-            comments
-          {{/if}}
-        </LinkTo>
-      </div>
-    {{/if}}
+    <div class='flex flex-wrap items-center text-xs text-grey'>
+      <span class='mr-1'>{{@score}} points</span>
+      <span class='mr-1'>by</span>
+      <LinkTo class='mr-1 hover:underline' @route='user' @query={{hash id=@by}}>
+        {{@by}}
+      </LinkTo>
+      <LinkTo class='mr-1 hover:underline' @route='item' @query={{hash id=@id}}>
+        {{time-elapsed @time}}
+      </LinkTo>
+      <span class='mr-1'>|</span>
+      <button
+        type='button'
+        class='mr-1 hover:underline'
+        {{on 'click' (fn @toggleItemVisibility @id)}}
+      >
+        {{#if @isVisible}}
+          hide
+        {{else}}
+          un-hide
+        {{/if}}
+      </button>
+      <span class='mr-1'>|</span>
+      <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
+        {{#if this.isNoCommentsOnStory}}
+          discuss
+        {{else}}
+          {{@descendants}}
+          comments
+        {{/if}}
+      </LinkTo>
+    </div>
   </div>
 </div>
