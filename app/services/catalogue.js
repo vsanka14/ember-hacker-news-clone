@@ -58,10 +58,7 @@ export default class CatalogueService extends Service {
           return;
       }
     } catch (err) {
-      console.error(
-        `Could not fetch item API response for ${id} of type ${type}`,
-        err
-      );
+      console.error(`Could not fetch item API response for ${id}`, err);
     }
   }
 
