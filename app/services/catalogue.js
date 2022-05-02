@@ -2,14 +2,19 @@ import Service from '@ember/service';
 import Story from 'hacker-news-clone/models/story';
 import Comment from 'hacker-news-clone/models/comment';
 import User from 'hacker-news-clone/models/user';
+import Poll from 'hacker-news-clone/models/poll';
+import PollOpt from 'hacker-news-clone/models/poll-opt';
+import Job from 'hacker-news-clone/models/job';
 import fetch from 'fetch';
 
 const baseURL = 'https://hacker-news.firebaseio.com/v0';
 
 const ITEM_TYPES = {
-  story: 'item',
-  comment: 'item',
-  user: 'user',
+  STORY: 'story',
+  COMMENT: 'comment',
+  JOB: 'job',
+  POLL: 'poll',
+  POLL_OPT: 'pollopt',
 };
 
 const STORY_TYPES = {
@@ -23,37 +28,55 @@ const STORY_TYPES = {
 
 export default class CatalogueService extends Service {
   /**
-   * Returns object for a HN item like story, comment etc
+   * Fetches API response for a HN item of type: "story" | "comment" | "poll" | "poll_opt" | "job"
    * @param {number} id: item id
-   * @param {string} type: "story" | "comment"
    * @returns {Promise} Promise resolving to a HN item
    */
-  async fetchItem(id, type) {
+  async fetchItem(id) {
     try {
-      const url = `${baseURL}/${ITEM_TYPES[type]}/${id}.json`;
+      const url = `${baseURL}/item/${id}.json`;
       const response = await fetch(url);
       const json = await response.json();
-
-      if (!json) return;
+      const { type } = json;
 
       switch (type) {
-        case 'story':
+        case ITEM_TYPES.STORY:
           return new Story(json);
-        case 'comment':
+        case ITEM_TYPES.COMMENT:
           if (!json.text) return;
-          json.replies = await this.fetchItems(json.kids, type);
+          json.replies = await this.fetchItems(json.kids);
           return new Comment(json);
-        case 'user':
-          return new User(json);
+        case ITEM_TYPES.JOB:
+          return new Job(json);
+        case ITEM_TYPES.POLL:
+          return new Poll(json);
+        case ITEM_TYPES.POLL_OPT:
+          return new PollOpt(json);
         default:
           console.error(`Could not fetch item for invalid type ${type}`);
           return;
       }
     } catch (err) {
       console.error(
-        `Could not fetch API response for ${id} of type ${type}`,
+        `Could not fetch item API response for ${id} of type ${type}`,
         err
       );
+    }
+  }
+
+  /**
+   * Fetches API response for a user
+   * @param {number} id: user id
+   * @returns {Promise} Promise resolving to user object
+   */
+  async fetchUser(id) {
+    try {
+      const url = `${baseURL}/user/${id}.json`;
+      const response = await fetch(url);
+      const json = await response.json();
+      return new User(json);
+    } catch (err) {
+      console.error(`Could not fetch user API response for ${id}`, err);
     }
   }
 
@@ -76,13 +99,13 @@ export default class CatalogueService extends Service {
    * @param {string} type: "story" | "comment"
    * @returns {Promise} Promise resolving to an array of HN items
    */
-  async fetchItems(ids, type) {
+  async fetchItems(ids) {
     const items = [];
 
     if (!ids) return items;
 
     for (const id of ids) {
-      const item = await this.fetchItem(id, type);
+      const item = await this.fetchItem(id);
       if (item) items.push(item);
     }
 
@@ -127,7 +150,7 @@ export default class CatalogueService extends Service {
    * @returns Array of all comments on the story
    */
   async fetchComments(commentIds) {
-    const comments = await this.fetchItems(commentIds, 'comment');
+    const comments = await this.fetchItems(commentIds);
     this.traverseComments(comments);
     return comments;
   }
@@ -160,7 +183,7 @@ export default class CatalogueService extends Service {
   async fetchStoriesOnPage(page, type) {
     const topStories = await this.fetchStories(type);
     const storyIds = this.getIdsForStoriesOnPage(page, topStories);
-    const stories = await this.fetchItems(storyIds, 'story');
+    const stories = await this.fetchItems(storyIds);
     return stories;
   }
 }

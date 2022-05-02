@@ -12,7 +12,7 @@ export default class JobsRoute extends Route {
   };
 
   async model({ page }) {
-    const stories = await this.catalogue.fetchStoriesOnPage(page, 'jobs');
-    return stories;
+    const jobs = await this.catalogue.fetchStoriesOnPage(page, 'jobs');
+    return jobs;
   }
 }

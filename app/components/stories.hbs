@@ -21,7 +21,7 @@
 {{#if this.isMoreBtnVisible}}
   <LinkTo
     type='button'
-    class='mt-2 ml-9 text-grey'
+    class='mt-2 text-grey {{if @isIndexAndUpvoteHidden "ml-4" "ml-9"}}'
     @route={{this.router.currentRouteName}}
     @query={{hash p=this.nextPage}}
     aria-label='Link to next page'

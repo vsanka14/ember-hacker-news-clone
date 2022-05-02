@@ -8,7 +8,7 @@
       <button type='button' class='text-xs mr-1 mt-0.5'>&#x25B2;</button>
     </div>
   {{/unless}}
-  <div class={{if @isIndexAndUpvoteHidden 'ml-8'}}>
+  <div class={{if @isIndexAndUpvoteHidden 'ml-4'}}>
     <div class='flex flex-wrap items-center'>
       <p class='mr-1 {{if @isHeader "tracking-wide"}}'>{{@title}}</p>
       {{#if @url}}
@@ -20,13 +20,11 @@
       {{/if}}
     </div>
     {{#if @shouldOnlyShowTimeInSubtext}}
-      <LinkTo
-        class='mr-1 hover:underline text-xs text-grey'
-        @route='item'
-        @query={{hash id=@id}}
-      >
-        {{time-elapsed @time}}
-      </LinkTo>
+      <div class='flex flex-wrap items-center text-xs text-grey'>
+        <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
+          {{time-elapsed @time}}
+        </LinkTo>
+      </div>
     {{else}}
       <div class='flex flex-wrap items-center text-xs text-grey'>
         <span class='mr-1'>{{@score}} points</span>

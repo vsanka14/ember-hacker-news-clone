@@ -11,7 +11,7 @@ export default class UserRoute extends Route {
   };
 
   async model({ id }) {
-    const user = await this.catalogue.fetchItem(id, 'user');
+    const user = await this.catalogue.fetchUser(id);
     return user;
   }
 }
