@@ -11,8 +11,9 @@ export default class ItemRoute extends Route {
   };
 
   async model({ id }) {
-    const story = await this.catalogue.fetchItem(id, 'story');
-    const comments = await this.catalogue.fetchComments(story.kids);
-    return { story, comments };
+    const item = await this.catalogue.fetchItem(id);
+    const comments = await this.catalogue.fetchComments(item.kids);
+    console.log({ item });
+    return { item, comments };
   }
 }

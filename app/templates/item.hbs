@@ -1,24 +1,52 @@
-{{page-title @model.story.title replace=true}}
+{{! template-lint-disable no-triple-curlies }}
+{{page-title @model.item.title replace=true}}
 
 <Layout>
   <div class='px-2.5 pt-1'>
-    <StoryItem
-      @isHeader={{true}}
-      @isIndexHidden={{true}}
-      @by={{@model.story.by}}
-      @url={{@model.story.url}}
-      @title={{@model.story.title}}
-      @score={{@model.story.score}}
-      @time={{@model.story.time}}
-      @descendants={{@model.story.descendants}}
-      @text={{@model.story.text}}
-      @isVisible={{@model.story.isVisible}}
-      @toggleItemVisibility={{this.toggleItemVisibility}}
-    />
-    <AddCommentForm />
-    <div class='mb-8'>
-      <CommentThread @comments={{@model.comments}} />
-    </div>
+    {{#if this.isJobItem}}
+      <JobItem
+        @isHeader={{true}}
+        @by={{@model.item.by}}
+        @url={{@model.item.url}}
+        @title={{@model.item.title}}
+        @score={{@model.item.score}}
+        @time={{@model.item.time}}
+        @descendants={{@model.item.descendants}}
+        @text={{@model.item.text}}
+        @isVisible={{@model.item.isVisible}}
+        @toggleItemVisibility={{this.toggleItemVisibility}}
+      />
+      {{#if @model.item.text}}
+        <div
+          class='ml-3 mt-2 text-grey rendered-html'
+        >{{{@model.item.text}}}</div>
+      {{/if}}
+    {{else}}
+      <StoryItem
+        @isHeader={{true}}
+        @by={{@model.item.by}}
+        @url={{@model.item.url}}
+        @title={{@model.item.title}}
+        @score={{@model.item.score}}
+        @time={{@model.item.time}}
+        @descendants={{@model.item.descendants}}
+        @text={{@model.item.text}}
+        @isVisible={{@model.item.isVisible}}
+        @toggleItemVisibility={{this.toggleItemVisibility}}
+      />
+      {{#if @model.item.text}}
+        <div
+          class='ml-4 mt-2 text-grey rendered-html'
+        >{{{@model.item.text}}}</div>
+      {{/if}}
+      {{#if @model.item.options}}
+        <Poll @options={{@model.item.options}} />
+      {{/if}}
+      <AddCommentForm />
+      <div class='mb-8'>
+        <CommentThread @comments={{@model.comments}} />
+      </div>
+    {{/if}}
   </div>
 </Layout>
 {{outlet}}

@@ -1,0 +1,12 @@
+<ul class='mt-5 ml-8 text-xs'>
+  {{#each @options as |option|}}
+    <div class='flex items-start mt-3'>
+      <button type='button' class='text-grey mr-1.5'>&#x25B2;</button>
+      <p>{{option.text}}</p>
+    </div>
+    <div class='ml-4 text-grey'>
+      {{option.score}}
+      points
+    </div>
+  {{/each}}
+</ul>

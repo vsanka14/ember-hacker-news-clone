@@ -15,6 +15,7 @@ export default class Poll {
     type,
     url,
     text,
+    options,
   }) {
     this.by = by;
     this.id = id;
@@ -27,6 +28,7 @@ export default class Poll {
     this.type = type;
     this.url = url;
     this.text = text;
+    this.options = options;
     this.isVisible = true;
   }
 }

@@ -1,0 +1,19 @@
+<div class='my-1 flex'>
+  <div class='ml-4'>
+    <div class='flex flex-wrap items-center'>
+      <p class='mr-1 {{if @isHeader "tracking-wide"}}'>{{@title}}</p>
+      {{#if @url}}
+        <a
+          href={{@url}}
+          target='blank'
+          class='text-grey text-xs hover:underline'
+        >({{truncate-url @url}})</a>
+      {{/if}}
+    </div>
+    <div class='flex flex-wrap items-center text-xs text-grey'>
+      <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
+        {{time-elapsed @time}}
+      </LinkTo>
+    </div>
+  </div>
+</div>

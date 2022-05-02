@@ -49,6 +49,7 @@ export default class CatalogueService extends Service {
         case ITEM_TYPES.JOB:
           return new Job(json);
         case ITEM_TYPES.POLL:
+          json.options = await this.fetchItems(json.parts);
           return new Poll(json);
         case ITEM_TYPES.POLL_OPT:
           return new PollOpt(json);
