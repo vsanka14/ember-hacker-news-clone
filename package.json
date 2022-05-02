@@ -25,6 +25,10 @@
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.6.0",
+    "@embroider/compat": "^1.6.0",
+    "@embroider/core": "^1.6.0",
+    "@embroider/router": "^1.6.0",
+    "@embroider/webpack": "^1.6.0",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "autoprefixer": "^10.4.5",
@@ -63,7 +67,7 @@
     "qunit-dom": "^2.0.0",
     "tailwindcss": "^3.0.24",
     "tracked-built-ins": "^2.0.1",
-    "webpack": "^5.69.1"
+    "webpack": "^5.72.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
