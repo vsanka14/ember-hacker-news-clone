@@ -1,5 +1,7 @@
 # hacker-news-clone
 
+Development in progress 🚧
+
 I'm building a hacker news clone in ember.js to learn the framework. Some goals I hope to achieve:
 
 - Familiarize myself with the basic concepts of Ember:
@@ -16,8 +18,6 @@ I'm building a hacker news clone in ember.js to learn the framework. Some goals 
 - Use Embroider for building the app. Learn:
   - route-based code splitting
 - Integrate SSR using Ember Fastboot
-
-Development in progress 🚧
 
 ## Prerequisites
 
