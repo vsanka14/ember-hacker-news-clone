@@ -7,8 +7,6 @@ import PollOpt from 'hacker-news-clone/models/poll-opt';
 import Job from 'hacker-news-clone/models/job';
 import fetch from 'fetch';
 
-const baseURL = 'https://hacker-news.firebaseio.com/v0';
-
 const ITEM_TYPES = {
   STORY: 'story',
   COMMENT: 'comment',
@@ -34,11 +32,10 @@ export default class CatalogueService extends Service {
    */
   async fetchItem(id) {
     try {
-      const url = `${baseURL}/item/${id}.json`;
+      const url = `/item/${id}.json`;
       const response = await fetch(url);
       const json = await response.json();
       const { type } = json;
-
       switch (type) {
         case ITEM_TYPES.STORY:
           return new Story(json);
@@ -69,7 +66,7 @@ export default class CatalogueService extends Service {
    */
   async fetchUser(id) {
     try {
-      const url = `${baseURL}/user/${id}.json`;
+      const url = `/user/${id}.json`;
       const response = await fetch(url);
       const json = await response.json();
       return new User(json);
@@ -160,7 +157,7 @@ export default class CatalogueService extends Service {
    */
   async fetchStories(type) {
     try {
-      const response = await fetch(`${baseURL}/${STORY_TYPES[type]}.json`);
+      const response = await fetch(`/${STORY_TYPES[type]}.json`);
       const json = await response.json();
       return json;
     } catch (err) {

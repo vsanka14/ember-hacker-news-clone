@@ -1,6 +1,6 @@
-<ul>
+<ul data-test-stories>
   {{#each this.visibleStories as |item index|}}
-    <li>
+    <li data-test-story>
       {{#if @isJobsPage}}
         <JobItem
           @index={{add index this.indexIncrementor}}

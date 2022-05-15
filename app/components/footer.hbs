@@ -1,10 +1,5 @@
 <footer class='w-full flex flex-col items-center justify-center text-grey'>
-  <a
-    href='https://www.ycombinator.com/apply/'
-    rel='noopener noreferrer'
-    target='_blank'
-  >Applications are open for YC Summer 2022</a>
-  <div class='my-3 text-xs'>
+  <div class='my-6 text-xs'>
     {{#each
       (array
         (hash name='Guidelines' route='newsguidelines')
@@ -14,7 +9,7 @@
         (hash name='Security' route='newsguidelines')
         (hash name='Legal' route='newsguidelines')
         (hash name='Apply to YC' route='newsguidelines')
-        (hash name='Apply to YC' route='newsguidelines')
+        (hash name='Contact' route='newsguidelines')
       )
       as |routeItem index|
     }}
