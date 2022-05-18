@@ -1,7 +1,10 @@
 <div class='my-1 flex'>
   <div class='flex items-start text-grey'>
     {{#unless @isHeader}}
-      <span class='inline-block w-5 mr-1 text-right'>{{@index}}.</span>
+      <span
+        class='inline-block w-5 mr-1 text-right'
+        data-test-story-item__index
+      >{{@index}}.</span>
     {{/unless}}
     <button type='button' class='text-xs mr-1.5'>&#x25B2;</button>
   </div>
@@ -13,22 +16,34 @@
           href={{@url}}
           target='blank'
           class='text-grey text-xs hover:underline'
+          data-test-story-item__url
         >({{truncate-url @url}})</a>
       {{/if}}
     </div>
     <div class='flex flex-wrap items-center text-xs text-grey'>
-      <span class='mr-1'>{{@score}} points</span>
+      <span class='mr-1' data-test-story-item__score>{{@score}} points</span>
       <span class='mr-1'>by</span>
-      <LinkTo class='mr-1 hover:underline' @route='user' @query={{hash id=@by}}>
+      <LinkTo
+        class='mr-1 hover:underline'
+        @route='user'
+        @query={{hash id=@by}}
+        data-test-story-item__by
+      >
         {{@by}}
       </LinkTo>
-      <LinkTo class='mr-1 hover:underline' @route='item' @query={{hash id=@id}}>
+      <LinkTo
+        class='mr-1 hover:underline'
+        @route='item'
+        @query={{hash id=@id}}
+        data-test-story-item-time
+      >
         {{time-elapsed @time}}
       </LinkTo>
       <span class='mr-1'>|</span>
       <button
         type='button'
         class='mr-1 hover:underline'
+        data-test-story-item__hide-btn
         {{on 'click' (fn @toggleItemVisibility @id)}}
       >
         {{#if @isVisible}}
@@ -38,7 +53,12 @@
         {{/if}}
       </button>
       <span class='mr-1'>|</span>
-      <LinkTo class='hover:underline' @route='item' @query={{hash id=@id}}>
+      <LinkTo
+        class='hover:underline'
+        @route='item'
+        @query={{hash id=@id}}
+        data-test-story-item-num-of-comments
+      >
         {{#if this.isNoCommentsOnStory}}
           discuss
         {{else}}

@@ -3,6 +3,7 @@
     class='font-extrabold flex mr-2 tracking-wide'
     @route='news'
     @query={{hash p=1}}
+    data-test-navbar__logo-link
   >
     <img
       src='https://news.ycombinator.com/y18.gif'
@@ -21,7 +22,11 @@
     as |routeItem index|
   }}
     {{#let (equals index 3) as |isLastItem|}}
-      <LinkTo @route={{routeItem.route}} @query={{hash p=1}}>
+      <LinkTo
+        @route={{routeItem.route}}
+        @query={{hash p=1}}
+        data-test-navbar__link={{routeItem.name}}
+      >
         <span
           class={{if
             (equals this.currentRouteName routeItem.route)
