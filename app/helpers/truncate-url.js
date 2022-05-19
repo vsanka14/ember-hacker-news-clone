@@ -3,21 +3,14 @@ import { helper } from '@ember/component/helper';
 function truncateUrl([url]) {
   if (typeof url !== 'string') return;
 
-  let domainName;
+  let regExp = /([\w-]+\.)+\w+/g;
+  let domainName = url.match(regExp);
+  if (!domainName) return;
 
-  try {
-    const { hostname } = new URL(url);
-    const hostnameArr = hostname.split('.');
-    const isLeadingWithWWW = hostnameArr[0] === 'www';
-    if (isLeadingWithWWW) {
-      domainName = hostnameArr.slice(1).join('.');
-    } else {
-      domainName = hostnameArr.join('.');
-    }
-  } catch (err) {
-    console.error(`Could not construct url for ${url}`, err);
+  const domainNameArr = domainName[0].split('.');
+  if (domainNameArr[0] === 'www') {
+    domainName = domainNameArr.slice(1).join('.');
   }
-
   return domainName;
 }
 

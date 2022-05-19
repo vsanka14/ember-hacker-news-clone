@@ -2,18 +2,18 @@
 <div class='text-grey'>
   <div class='flex text-left'>
     <p class='mr-2 w-14'>user:</p>
-    <p>{{@id}}</p>
+    <p data-test-user-profile__id>{{@id}}</p>
   </div>
   <div class='flex text-left'>
     <p class='mr-2 w-14'>created:</p>
-    <p>{{to-date-string @created}}</p>
+    <p data-test-user-profile__created>{{to-date-string @created}}</p>
   </div>
   <div class='flex text-left'>
     <p class='mr-2 w-14'>karma:</p>
-    <p>{{@karma}}</p>
+    <p data-test-user-profile__karma>{{@karma}}</p>
   </div>
   <div class='flex text-left'>
     <p class='mr-2 w-14'>about:</p>
-    <p class='rendered-html'>{{{@about}}}</p>
+    <p data-test-user-profile__about class='rendered-html'>{{{@about}}}</p>
   </div>
 </div>

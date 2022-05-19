@@ -9,16 +9,12 @@ export default Factory.extend({
     return i;
   },
 
-  descendants() {
-    return Math.floor(Math.random() * 100);
-  },
-
   score() {
     return Math.floor(Math.random() * 100);
   },
 
   title(i) {
-    return `Story ${i}`;
+    return `Job ${i}`;
   },
 
   text() {
@@ -30,7 +26,7 @@ export default Factory.extend({
   },
 
   type() {
-    return 'story';
+    return 'job';
   },
 
   url() {

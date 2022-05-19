@@ -6,21 +6,49 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | user-profile', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  hooks.beforeEach(function () {
+    this.set('id', 123);
+    this.set('created', Date.now());
+    this.set('karma', 50);
+    this.set('about', 'Lorem Ipsum');
+  });
 
-    await render(hbs`<UserProfile />`);
+  const TEMPLATE = hbs`
+    <UserProfile 
+      @id={{this.id}}
+      @created={{this.created}}
+      @karma={{this.karma}}
+      @about={{this.about}}
+    />
+  `;
 
-    assert.dom(this.element).hasText('');
+  test('it renders id', async function (assert) {
+    assert.expect(1);
 
-    // Template block usage:
-    await render(hbs`
-      <UserProfile>
-        template block text
-      </UserProfile>
-    `);
+    this.set('id', 123);
 
-    assert.dom(this.element).hasText('template block text');
+    await render(TEMPLATE);
+
+    assert.dom('[data-test-user-profile__id]').hasText('123');
+  });
+
+  test('it renders karma', async function (assert) {
+    assert.expect(1);
+
+    this.set('karma', 50);
+
+    await render(TEMPLATE);
+
+    assert.dom('[data-test-user-profile__karma]').hasText('50');
+  });
+
+  test('it renders about', async function (assert) {
+    assert.expect(1);
+
+    this.set('about', 'lorem ipsum');
+
+    await render(TEMPLATE);
+
+    assert.dom('[data-test-user-profile__about]').hasText('lorem ipsum');
   });
 });

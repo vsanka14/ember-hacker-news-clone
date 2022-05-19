@@ -1,6 +1,6 @@
 <ul data-test-stories>
   {{#each this.visibleStories as |item index|}}
-    <li data-test-story>
+    <li>
       {{#if @isJobsPage}}
         <JobItem
           @index={{add index this.indexIncrementor}}
@@ -33,6 +33,7 @@
 </ul>
 {{#if this.isMoreBtnVisible}}
   <LinkTo
+    data-test-stories__more-btn
     type='button'
     class='mt-2 text-grey {{if @isJobsPage "ml-4" "ml-9"}}'
     @route={{this.router.currentRouteName}}
@@ -41,5 +42,5 @@
   >More</LinkTo>
 {{/if}}
 {{#if this.isNoStoryFound}}
-  <p class='text-grey'>No stories found.</p>
+  <p class='text-grey' data-test-stories__no-stories-found>No stories found.</p>
 {{/if}}

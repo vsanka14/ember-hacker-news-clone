@@ -1,4 +1,4 @@
-<div class='my-1 flex'>
+<div class='my-1 flex' data-test-story-item>
   <div class='flex items-start text-grey'>
     {{#unless @isHeader}}
       <span
@@ -57,7 +57,7 @@
         class='hover:underline'
         @route='item'
         @query={{hash id=@id}}
-        data-test-story-item-num-of-comments
+        data-test-story-item__num-of-comments
       >
         {{#if this.isNoCommentsOnStory}}
           discuss

@@ -119,4 +119,34 @@ module('Integration | Component | story-item', function (hooks) {
 
     assert.verifySteps(['Invoked toggleItemVisibility with 123']);
   });
+
+  test('it renders `discuss` if number of comments is 0', async function (assert) {
+    assert.expect(2);
+
+    this.set('descendants', 0);
+
+    await render(TEMPLATE);
+
+    assert.dom('[data-test-story-item__num-of-comments]').hasText('discuss');
+
+    assert
+      .dom('[data-test-story-item__num-of-comments]')
+      .hasAttribute('href', '/item?id=4200');
+  });
+
+  test('it renders `number of comments` if number of comments is greater than 0', async function (assert) {
+    assert.expect(2);
+
+    this.set('descendants', 123);
+
+    await render(TEMPLATE);
+
+    assert
+      .dom('[data-test-story-item__num-of-comments]')
+      .hasText('123 comments');
+
+    assert
+      .dom('[data-test-story-item__num-of-comments]')
+      .hasAttribute('href', '/item?id=4200');
+  });
 });

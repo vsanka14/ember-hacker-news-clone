@@ -13,10 +13,6 @@ export default class AskController extends Controller {
 
   constructor() {
     super(...arguments);
-
-    this.router.on('routeDidChange', () => {
-      document.documentElement.scrollTop = 0;
-    });
   }
 
   @action
