@@ -23,12 +23,14 @@ export default class Comment extends Component {
 
   @action
   scrollToComment(id) {
+    console.log('called');
     const el = document.getElementById(id);
     el?.scrollIntoView({ behavior: 'smooth' });
   }
 
   @action
   toggleCommentVisibility() {
+    console.log('called');
     this.isCollapsed = !this.isCollapsed;
   }
 }
